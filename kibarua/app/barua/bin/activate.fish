@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/maina/ALX/Kibarua_App/Flask/barua
+set -gx VIRTUAL_ENV /home/maina/ALX/Kibarua_App/kibarua/app/barua
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

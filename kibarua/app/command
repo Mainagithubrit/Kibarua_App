@@ -1,0 +1,1 @@
+export FLASK_APP=__init__.py && export FLASK_ENV=environment && flask --app __init__.py run --debug
