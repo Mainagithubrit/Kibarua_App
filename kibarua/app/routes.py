@@ -21,5 +21,5 @@ def signup():
     """This handles the sugnup route"""
     return render_template('signup.html', title='Sign In Page', view='signup')
 
-if __name__ == "main":
+if __name__ == "__main__":
     app.run(debug=True)
