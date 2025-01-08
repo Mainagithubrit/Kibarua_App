@@ -2,6 +2,7 @@
 from flask import render_template, request, url_for, redirect
 from pymongo import MongoClient
 from app import app
+from models import User
 
 app.config['STRICT_SLASHES'] = False
 
@@ -19,7 +20,8 @@ def login():
 @app.route('/signup', methods=('GET', 'POST'))
 def signup():
     """This handles the sugnup route"""
-    return render_template('signup.html', title='Sign In Page', view='signup')
+    return render_template('signup.html', title='Sign In Page', view='signup,')
+    return User().signup()
 
 if __name__ == "__main__":
     app.run(debug=True)
