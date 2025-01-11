@@ -128,11 +128,11 @@
 		</nav>
 		<div class="container">
 			<h2>Sign Up</h2>
-			<form method="post">
-				<input type="text" placeholder="Full Name" required />
-				<input type="text" placeholder="Username" required />
-				<input type="email" placeholder="Email" required />
-				<input type="password" placeholder="Password" required />
+			<form method="post" action='/signup'>
+				<input type="text" placeholder="Full Name" name="fullname" required />
+				<input type="text" placeholder="Username" name="username" required />
+				<input type="email" placeholder="Email" name="email" required />
+				<input type="password" placeholder="Password" name="passwrd" required />
 				<button type="submit">Sign Up</button>
 			</form>
 			<div class="link">
