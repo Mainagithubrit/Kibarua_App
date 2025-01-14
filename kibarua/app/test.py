@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 client = MongoClient("mongodb://localhost:27017/")
-db = client.kibarua_db
+db = client.my_db
 
 # Insert test data
 db.users.insert_one({'name': 'test_user', 'password': 'test_password'})
