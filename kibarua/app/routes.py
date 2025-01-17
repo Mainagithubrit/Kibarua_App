@@ -1,5 +1,5 @@
 """This handles the routes for the app"""
-from flask import render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect, session
 from flask_pymongo import PyMongo
 from . import app, mongo
 import bcrypt
@@ -15,7 +15,7 @@ def index():
     return render_template('index.html', title='Home')
 
 
-@app.route('/login', methods=["GET"])
+@app.route('/login', methods=["GET", 'POST'])
 def login():
     """This handles the login route"""
     if request.method == 'POST':
@@ -35,9 +35,11 @@ def login():
                     username_exists['password']
                     )
             ):
+            session['username'] = username
             return redirect(url_for('choice'))
         return 'Invalid username, email and password', 400
     return render_template('login.html', title='Login Page', view='login')
+
 
 @app.route('/signup', methods=('GET', 'POST'))
 def signup():
@@ -68,11 +70,13 @@ def signup():
     return render_template('signup.html', title='Sign In Page', view='signup,')
 
 
-@app.route('/choice')
+@app.route("/choice")
 def choice():
     """This handles the choice page for someone to choose whether to be
     a client or a skilled woker"""
-    return render_template('choice.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('choice.html', title='Choice', view='choice')
 
 if __name__ == "__main__":
     app.run(debug=True)

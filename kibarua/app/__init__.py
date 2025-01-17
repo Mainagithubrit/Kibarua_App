@@ -7,4 +7,7 @@ app = Flask(__name__)
 app.config['MONGO_URI'] = "mongodb://localhost:27017/kibarua_db"
 mongo = PyMongo(app)
 
+from .config import Config
 from . import routes
+
+app.config.from_object(Config)
