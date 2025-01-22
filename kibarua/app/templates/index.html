@@ -119,7 +119,7 @@
 				max-width: 600px;
 			}
 
-			/* About Us Section */
+			
 			#about {
 				background-color: #f0f0f0;
 				color: green;
@@ -134,7 +134,7 @@
 				margin: 0 auto;
 			}
 
-			/* Contacts Section */
+
 			#contacts {
 				background-color: white;
 				color: green;
@@ -226,7 +226,7 @@
 
 		<section id="contacts">
 			<h2>Contact Us</h2>
-			<form method="post" action="/send-message">
+			<form method="POST" action="{{ url_for('index') }}">
 				<input type="text" name="name" placeholder="Your Name" required />
 				<input type="email" name="email" placeholder="Your Email" required />
 				<textarea
