@@ -113,6 +113,23 @@
 			.container .link a:hover {
 				text-decoration: underline;
 			}
+
+			.flashes {
+				list-style-type: none;
+				padding: 0;
+			}
+
+			.flashes li {
+				margin: 10px 0;
+				padding: 10px;
+				border-radius: 5px;
+			}
+
+			.flashes .error {
+				background-color: #f8d7da;
+				color: #721c24;
+				border: 1px solid #f5c6cb;
+			}
 		</style>
 	</head>
 	<body>
@@ -128,6 +145,16 @@
 		</nav>
 		<div class="container">
 			<h2>Login</h2>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+				<ul class="flashes">
+					 {% for category, message in messages %}
+					 	<li class="{{ category }}">{{ message }}</li>
+						{% endfor %}
+				</ul>
+				 {% endif %}
+			{% endwith %}
+
 			<form method="post" action='/login'>
 				<input type="name" placeholder="Username" name='username' required />
 				<input type="password" placeholder="Password"  name='passwrd' required />

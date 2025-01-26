@@ -5,7 +5,7 @@ from . import mongo, mail
 import bcrypt
 from flask_mail import Message
 from .config_passwrd import Email, password
-
+from flask import flash
 
 def register_routes(app):
     @app.route('/')
@@ -17,17 +17,20 @@ def register_routes(app):
             email = request.form.get('email')
             message = request.form.get('message')
 
+            if not name or not email or not message:
+                flash("All fields are required", "error")
+                return render_template('index.html', title='Home')
+
             msg = Message(subject=f"Mail from: {name}",
                           body=f"""
                           Name: {name}\n
                           E-mail: {email}\n\n\n
                           Message: {message}""",
-                          sender = Email,
-                          recipients =["njorogefrancismaina@gmail.com"])
+                          sender=Email,
+                          recipients=["njorogefrancismaina@gmail.com"])
             mail.send(msg)
             return render_template('index.html', success=True)
         return render_template('index.html', title='Home')
-
 
     @app.route('/login', methods=["GET", 'POST'])
     def login():
@@ -38,7 +41,8 @@ def register_routes(app):
             password = request.form.get('passwrd')
 
             if not username or not password:
-                return "Username and password are required", 400
+                flash("Username and password are required", "error")
+                return render_template('login.html', title='Login Page', view='login')
 
             username_exists = users.find_one({'username': username})
 
@@ -51,13 +55,14 @@ def register_routes(app):
             ):
                 session['username'] = username
                 return redirect(url_for('choice'))
-            return 'Invalid username, email and password', 400
-        return render_template('login.html', title='Login Page', view='login')
+            flash('Invalid username or password', "error")
+            return render_template('login.html', title='Login Page', view='login')
 
+        return render_template('login.html', title='Login Page', view='login')
 
     @app.route('/signup', methods=('GET', 'POST'))
     def signup():
-        """This handles the sugnup route"""
+        """This handles the signup route"""
         if request.method == 'POST':
             users = mongo.db['users']
             fullname = request.form.get('fullname')
@@ -66,27 +71,29 @@ def register_routes(app):
             password = request.form.get('passwrd')
 
             if not all([fullname, username, email, password]):
-                return "All fields are required", 400
-            user_exists = users.find_one({'username': username })
+                flash("All fields are required", "error")
+                return render_template('signup.html', title='Sign In Page', view='signup')
+
+            user_exists = users.find_one({'username': username})
 
             if user_exists:
-                return "Username already exists!", 400
+                flash("Username already exists!", "error")
+                return render_template('signup.html', title='Sign In Page', view='signup')
 
             hashpass = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
             users.insert_one({
                 'fullname': fullname,
                 'username': username,
-                'email':email,
+                'email': email,
                 'password': hashpass
             })
             return redirect(url_for('login'))
-        return render_template('signup.html', title='Sign In Page', view='signup,')
-
+        return render_template('signup.html', title='Sign In Page', view='signup')
 
     @app.route("/choice")
     def choice():
         """This handles the choice page for someone to choose whether to be
-        a client or a skilled woker"""
+        a client or a skilled worker"""
         if 'username' not in session:
             return redirect(url_for('login'))
         return render_template('choice.html', title='Choice', view='choice')

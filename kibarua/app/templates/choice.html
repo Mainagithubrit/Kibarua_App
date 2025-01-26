@@ -4,74 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choice</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
     <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('/static/images/images.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed; 
+            color: #f4f8f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-      body {
-				 		margin: 0;
-				 		font-family: 'Poppins', sans-serif;
-				 		background-image: url('/static/images/images.jpg');
-				 		background-size: cover; /* Ensures the image covers the entire screen */
-				 		background-repeat: no-repeat; /* Prevents tiling */
-				 		background-position: center center; /* Centers the image */
-				 		background-attachment: fixed; /* Keeps the image fixed during scrolling */
-				 		color: #f4f8f5; /* Light text for contrast */
-				 		display: flex;
-				 		flex-direction: column;
-				 		align-items: center;
-				 		justify-content: center;
-				 		min-height: 100vh;
-				 		text-align: center;
-				 		position: relative;
-				 		overflow: hidden;
-			  } 
+        .container {
+            background: rgba(29, 127, 116, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
 
         h1 {
             font-size: 2.5rem;
             font-weight: 600;
-            color: #f3eacb; /* Light gold to blend with background */
+            color: #f3eacb;
             margin-bottom: 1rem;
         }
 
         p {
             font-size: 1.25rem;
-            color: #f4f8f5; /* Light text */
+            color: #f4f8f5;
             margin-bottom: 2rem;
         }
 
         .highlight {
             font-weight: 700;
-            color: #d4af37; /* Gold accent */
+            color: #d4af37;
         }
 
         .button-container {
             display: flex;
             gap: 1.5rem;
+            justify-content: center;
         }
 
         button {
-            background-color: #1d7f74; /* Dark green */
-            color: #f4f8f5; /* Light text */
+            background-color: #1d7f74;
+            color: #f4f8f5;
             border: none;
             border-radius: 25px;
             padding: 0.75rem 2rem;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            background-color: #145c53; /* Darker green */
+            background-color: #145c53;
+            transform: translateY(-2px);
         }
 
         footer {
             margin-top: 3rem;
             font-size: 0.875rem;
-            color: #f4f8f5; /* Light text */
+            color: #f4f8f5;
         }
 
         footer a {
-            color: #d4af37; /* Gold accent */
+            color: #d4af37;
             text-decoration: none;
             font-weight: bold;
         }
@@ -82,14 +92,16 @@
     </style>
 </head>
 <body>
-    <h1>Welcome, <span class="highlight">{{ session.username }}</span>!</h1>
-    <p>Your journey starts here. Are you ready to choose your path?</p>
-    <div class="button-container">
-        <button onclick="window.location.href='/client'">I am a Client</button>
-        <button onclick="window.location.href='/skilled-worker'">I am a Skilled Worker</button>
+    <div class="container">
+        <h1>Welcome, <span class="highlight">{{ session.username }}</span>!</h1>
+        <p>Your journey starts here. Are you ready to choose your path?</p>
+        <div class="button-container">
+            <button onclick="location.href='/client'">I am a Client</button>
+            <button onclick="location.href='/freelancer'">I am a Skilled Worker</button>
+        </div>
+        <footer>
+            <p>Powered by Kibarua. <a onclick="location.href='/index#about'">Learn more</a></p>
+        </footer>
     </div>
-    <footer>
-        <p>Powered by Kibarua. <a href="/about">Learn more</a></p>
-    </footer>
 </body>
 </html>

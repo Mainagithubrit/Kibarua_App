@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kibarura iko</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .left-section {
+            flex: 1;
+            background-color: #f2f2f2;
+            position: relative;
+        }
+
+        .google-map-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .right-section {
+            flex: 2;
+            background-color: #204c3c;
+            position: relative;
+        }
+
+        .app-title {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: gold;
+            font-size: 1.5em;
+        }
+
+        .message-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: gold;
+            color: #204c3c;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        #unread-dot {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            margin-left: 5px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Messaging App Styles */
+        .messages-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+            z-index: 10; /* Ensure it appears on top */
+            overflow-y: auto;
+        }
+
+        .messages-header {
+            background-color: #204c3c;
+            color: white;
+            padding: 10px;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1em; /* Smaller size */
+            cursor: pointer;
+        }
+
+        .message-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+
+        .message-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .message-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .unread-messages {
+            background-color: #e0f7fa; /* Light blue background for unread messages */
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .read-messages {
+            padding: 10px;
+        }
+
+        .add-message {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .add-message button {
+            background-color: #004d00; /* Dark green background */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width : 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        .add-message input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-section">
+        <div class="google-map-placeholder">Google Map Placeholder</div>
+    </div>
+    <div class="right-section">
+        <div class="app-title">Messaging App</div>
+        <button class="message-button" onclick="toggleMessages()">Messages <span id="unread-dot"></span></button>
+        <div class="messages-panel" id="messagesPanel">
+            <div class="messages-header">
+                <span>Messages</span>
+                <button class="close-button" onclick="toggleMessages()">X</button>
+            </div>
+            <div class="message-list">
+                <div class="message-item unread-messages">
+                    <img src="user1.jpg" alt="User  1">
+                    <div>User 1: Hello!</div>
+                </div>
+                <div class="message-item read-messages">
+                    <img src="user2.jpg" alt="User  2">
+                    <div>User 2: How are you?</div>
+                </div>
+            </div>
+            <div class="add-message">
+                <input type="text" placeholder="Type a message...">
+                <button onclick="sendMessage()">+</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleMessages() {
+            const messagesPanel = document.getElementById('messagesPanel');
+            messagesPanel.style.transform = messagesPanel.style.transform === 'translateY(0%)' ? 'translateY(-100%)' : 'translateY(0%)';
+        }
+
+        function sendMessage() {
+            const input = document.querySelector('.add-message input');
+            const messageText = input.value;
+            if (messageText) {
+                const messageList = document.querySelector('.message-list');
+                const newMessage = document.createElement('div');
+                newMessage.className = 'message-item read-messages';
+                newMessage.innerHTML = `<img src="user3.jpg" alt="User  3"><div>User 3: ${messageText}</div>`;
+                messageList.appendChild(newMessage);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

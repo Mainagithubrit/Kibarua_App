@@ -11,7 +11,6 @@
 				scroll-behavior: smooth;
 			}
 
-			/* Navigation Bar */
 			nav {
 				position: fixed;
 				top: 0;
@@ -81,7 +80,6 @@
 				opacity: 0.9;
 			}
 
-			/* Progress Line */
 			.progress-line {
 				position: fixed;
 				top: 50px;
@@ -99,7 +97,6 @@
 				margin-top: 60px;
 			}
 
-			/* Home Section */
 			#home {
 				background-color: white;
 				color: green;
@@ -119,21 +116,48 @@
 				max-width: 600px;
 			}
 
-			
+			#home .home-image {
+				width: 100%; 
+				height: auto;
+				max-height: 400px;
+				object-fit: cover;
+				margin-top: 20px;
+			}
+
 			#about {
 				background-color: #f0f0f0;
 				color: green;
+				padding: 60px 20px;
 			}
 
 			#about h2 {
-				margin-bottom: 20px;
+				text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+				text-align: center;
 			}
 
-			#about p {
-				max-width: 600px;
-				margin: 0 auto;
+			.about-content {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 20px;
+				margin-top: 20px;
 			}
 
+			.image-description {
+				text-align: center;
+			}
+
+			.image-description img {
+				width: 100%; 
+				height: 200px; 
+				object-fit: cover; 
+				border-radius: 8px; 
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+				transition: transform 0.3s ease;
+			}
+
+			.image-description img:hover {
+				transform: scale(1.05);
+			}
 
 			#contacts {
 				background-color: white;
@@ -183,6 +207,10 @@
 
 				// Update the progress line on page load
 				updateProgressLine();
+
+				// Fade-in effect for about content
+				const aboutContent = document.querySelector(".about-content");
+				aboutContent.classList.add("visible");
 			});
 		</script>
 	</head>
@@ -213,15 +241,25 @@
 				Connecting skilled employees with potential employers seamlessly. Swipe,
 				match, and hire with ease!
 			</p>
+			<img src="/static/images/cash.jpg" alt="Kibarua Iko" class="home-image" />
 		</section>
 
 		<section id="about">
 			<h2>About Us</h2>
-			<p>
-				Kibarua Iko bridges the gap between skilled workers and employers. Using
-				GPS technology and skill-based filtering, we make hiring efficient and
-				straightforward.
-			</p>
+			<div class="about-content">
+				<div class="image-description">
+					<img src="static/images/bridging.jpg" alt="Puzzle Piece" />
+					<p>Kibarua Iko bridges the gap between skilled workers and employers.</p>
+				</div>
+				<div class="image-description">
+					<img src="static/images/swipe.jpg" alt="Location Pointer" />
+					<p>Swipe to choose best fit.</p>
+				</div>
+				<div class="image-description">
+					<img src="static/images/navigate.jpg" alt="Profile Swipe" />
+					<p> Using GPS technology and skill-based filtering, we make hiring efficient and straightforward.</p>
+				</div>
+			</div>
 		</section>
 
 		<section id="contacts">
