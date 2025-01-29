@@ -6,51 +6,52 @@ Kibarua Iko is a website that links skilled workers with people willing to hire.
 
 ## Features
 
-- User-friendly contact form
-- Email notifications upon form submission
-- Customizable email settings
+-   User-friendly contact form
+-   Email notifications upon form submission
+-   Customizable email settings
 
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- Python 3.x installed on your machine
-- A working email account to send notifications
+-   Python 3.x installed on your machine
+-   A working email account to send notifications
 
 ## Installation
 
-1. **Clone the repository:**
+1.  **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/yourusername/yourproject.git
-   cd yourproject
+    ```bash
+    git clone https://github.com/yourusername/yourproject.git
+    cd yourproject
 
-2. Install the required packages:
-	pip install -r requirements.txt
+    ```
 
-3. Create a configuration file:
-	You need to create a file named configure_password.py in the app directory of the project. This file will store your email credentials, in order for the Contact Us to send a message your email and password will be used as the sender's.
+2.  Install the required packages:
+    pip install -r requirements.txt
 
-		Email = "your_email@example.com"
-		password = 'your_password'
+3.  Create a configuration file:
+    You need to create a file named configure_password.py in the app directory of the project. This file will store your email credentials, in order for the Contact Us to send a message your email and password will be used as the sender's.
 
-	NOTE - The Email and password variable should be exactly the same, and replace the email and password with your details.
+        Email = "your_email@example.com"
+        password = 'your_password'
 
-4. Update the recipient email in routes.py:
-	Open the routes.py file and locate the line where the recipient's email is defined, this will enable the message to come to your email. Change it to your email address:
+    NOTE - The Email and password variable should be exactly the same, and replace the email and password with your details. Setup your sending email to be able to send stmp emails use this video to set it up if its a gmail https://www.youtube.com/watch?v=ZfEK3WP73eY
 
-		msg = Message(
+4.  Update the recipient email in routes.py:
+    Open the routes.py file and locate the line where the recipient's email is defined, this will enable the message to come to your email. Change it to your email address:
+
+        msg = Message(
+
     subject=f"Mail from: {name}",
     body=f"""
     Name: {name}\n
     E-mail: {email}\n\n\n
     Message: {message}""",
     sender=Email,
-    recipients=["your_email@example.com"]  # Change this to your email
+    recipients=["your_email@example.com"] # Change this to your email
 
-5. Run the application:
-	Start the application at the root of the directory there is a file run.py, use the command:
+5.  Run the application:
+    Start the application at the root of the directory there is a file run.py, use the command:
 
-	python3 -m run
-
-
+    python3 -m run
